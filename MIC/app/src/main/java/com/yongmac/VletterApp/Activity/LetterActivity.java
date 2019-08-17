@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -69,10 +69,8 @@ public class LetterActivity extends AppCompatActivity {
 
     Button recordBtn, playBtn, sendBtn, addressbookBtn;
     EditText edName, edPhoneNumber;
-    private String recever;
 
     public String HostingURL= "http://13.209.89.216:8080/NUGU/";
-//    public String HostingURL= "https://3e2cf084.ngrok.io/test";
     final String url_address = HostingURL + "/letterUpload";
 
     private Retrofit retrofit;
@@ -84,8 +82,7 @@ public class LetterActivity extends AppCompatActivity {
     public ArrayList<UserListVO.User> userArrayList;
     public UserListVO userListVO;
 
-
-
+    InputMethodManager imm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,27 +97,6 @@ public class LetterActivity extends AppCompatActivity {
         edPhoneNumber = (EditText) findViewById(R.id.edReceverPhoneNumber);
         edName = (EditText)findViewById(R.id.edReceverName);
 
-        edName.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        edPhoneNumber.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    //Enter키눌렀을떄 처리
-                    return true;
-                }
-                return false;
-            }
-        });
 
 
         PermissionFunction();
@@ -140,6 +116,7 @@ public class LetterActivity extends AppCompatActivity {
         XMLSetting();
 
     }
+
 
     private void RetrofitFunction() {
         setRetrofitInit();
@@ -296,6 +273,7 @@ public class LetterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean b = false;
+                phoneNumber = edPhoneNumber.getText().toString();
                 for (UserListVO.User userData : userArrayList) {
                     if (userData.getPhone().equals(phoneNumber)) {
                         b = true;
@@ -387,7 +365,7 @@ public class LetterActivity extends AppCompatActivity {
                 builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
                 if("".equals(edPhoneNumber)){
-                    ToastFunction("해당 친구가 존재하지 않습니다. 다시 선택해주세요.");
+                    ToastFunction("해당 친구가 존재하지 않습니다. 전화 번호를 입력해주세요.");
                     return ;
                 }
                 MyApplication myApp = (MyApplication) getApplicationContext();

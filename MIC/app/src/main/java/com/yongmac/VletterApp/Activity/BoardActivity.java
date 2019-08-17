@@ -61,7 +61,6 @@ public class BoardActivity extends AppCompatActivity {
     public String HostingURL= "http://13.209.89.216:8080/NUGU/";
     final String url_address = HostingURL + "/boardUpload";
 
-    MyApplication myApp;
      InputMethodManager imm;
 
     @Override
@@ -325,6 +324,7 @@ public class BoardActivity extends AppCompatActivity {
             try {
                 builder = MultipartEntityBuilder.create();
                 builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+                MyApplication myApp;
                 myApp = (MyApplication) getApplicationContext();
                 if ("".equals(edtitle.getText().toString())) {
                     ToastFunction("제목이 입력되지 않았습니다.\n 제목을 입력해주세요.");
@@ -334,6 +334,7 @@ public class BoardActivity extends AppCompatActivity {
                     ToastFunction("보내실 테마가 입력되지 않았습니다.\n 테마를 선택해주세요.");
                     return;
                 }
+
                 builderSetting("id", myApp.getId());
                 builderSetting("title", edtitle.getText().toString());
                 builderSetting("theme", TvTheme.getText().toString());

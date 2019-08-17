@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
@@ -17,6 +19,7 @@
             android:id="@+id/sendTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="40dp"
             android:text="편지 보내기"
             android:textAlignment="center"
             android:textSize="30sp" />
@@ -25,15 +28,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_weight="16"
+        android:layout_weight="10"
         android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            >
+            android:layout_height="35dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,38 +46,40 @@
                     android:id="@+id/tvReceiver"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="7dp"
+                    android:layout_margin="10dp"
                     android:text="받을 사람"
+                    android:textAlignment="center"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="7"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/edReceverName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+
+                    android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/addressbook"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="..." />
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="10dp">
@@ -150,32 +154,37 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <Button
                         android:id="@+id/Btnplay"
-                        android:layout_width="200dp"
+                        android:layout_width="120dp"
 
-                        android:layout_height="60dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentStart="true"
 
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="50dp"
-                        android:layout_marginTop="60dp"
-                        android:layout_marginEnd="50dp"
-                        android:layout_marginBottom="60dp"
-                        android:background="@drawable/buttonshape"
+                        android:layout_marginStart="8dp"
 
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/buttonshape"
                         android:shadowColor="#9C96A8"
                         android:shadowDx="0"
                         android:shadowDy="0"
                         android:shadowRadius="5"
-                        android:text="재생" />
-                </RelativeLayout>
+                        android:text="재생"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.431"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.493" />
+                </android.support.constraint.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -183,51 +192,55 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <Button
                         android:id="@+id/Btnrecord"
-                        android:layout_width="200dp"
+                        android:layout_width="120dp"
 
-                        android:layout_height="60dp"
+                        android:layout_height="50dp"
                         android:layout_alignParentStart="true"
 
 
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginStart="50dp"
-                        android:layout_marginTop="60dp"
-                        android:layout_marginEnd="50dp"
-                        android:layout_marginBottom="60dp"
-                        android:background="@drawable/buttonshape"
 
+                        android:layout_marginStart="8dp"
+
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/buttonshape"
                         android:shadowColor="#9C96A8"
+
                         android:shadowDx="0"
                         android:shadowDy="0"
                         android:shadowRadius="5"
                         android:text="녹음하기"
-
-                        />
-                </RelativeLayout>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:orientation="horizontal">
 
-            <RelativeLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <Button
                     android:id="@+id/BtnSend"
-                    android:layout_width="200dp"
+                    android:layout_width="140dp"
 
                     android:layout_height="60dp"
                     android:layout_alignParentStart="true"
@@ -236,21 +249,25 @@
 
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="130dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginEnd="130dp"
-                    android:layout_marginBottom="50dp"
+
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/buttonshape"
                     android:shadowColor="#9C96A8"
-
                     android:shadowDx="0"
+
                     android:shadowDy="0"
                     android:shadowRadius="5"
                     android:text="보내기"
                     android:textColor="#FFFFFF"
-
-                    />
-            </RelativeLayout>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>
 
