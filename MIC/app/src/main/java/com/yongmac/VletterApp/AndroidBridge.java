@@ -24,11 +24,11 @@ public class AndroidBridge {
 
 
     @JavascriptInterface
-    public void sendVletter(final String data) {
+    public void sendVLetter(final String data) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Log.d("tag------","오긴 왔다.");
+                Log.d("sendVLetter","오긴 왔다.");
                 Log.d("data-----",data);
                 Intent intent = new Intent(mContext.getApplicationContext(), LetterActivity.class);
 //                intent.putExtra("id",data);
@@ -45,6 +45,8 @@ public class AndroidBridge {
         handler.post(new Runnable() {
             @Override
             public void run() {
+                Log.d("sendBoard","오긴 왔다.");
+                Log.d("data-----",data);
                 Intent intent = new Intent(mContext.getApplicationContext(), BoardActivity.class);
                 myApp = (MyApplication)mContext.getApplicationContext();
                 myApp.setId(data);

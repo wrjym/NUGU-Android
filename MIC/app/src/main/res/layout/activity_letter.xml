@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@color/backgroud"
     android:orientation="vertical">
 
@@ -58,7 +60,9 @@
                     android:id="@+id/edReceverName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    
+                    />
 
                 <Button
                     android:id="@+id/addressbook"

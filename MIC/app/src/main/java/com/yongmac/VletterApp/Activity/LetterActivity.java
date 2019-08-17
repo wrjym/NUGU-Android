@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,34 +72,73 @@ public class LetterActivity extends AppCompatActivity {
     private String recever;
 
     public String HostingURL= "http://13.209.89.216:8080/NUGU/";
+//    public String HostingURL= "https://3e2cf084.ngrok.io/test";
     final String url_address = HostingURL + "/letterUpload";
 
     private Retrofit retrofit;
     private RetrofitAPI mRetrofitAPI;
 
-    MyApplication myApp = (MyApplication) getApplicationContext();
+
     final String URL_ADRESS = HostingURL;
 
     public ArrayList<UserListVO.User> userArrayList;
     public UserListVO userListVO;
 
-    Intent intent = getIntent();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_letter);
 
+
+        recordBtn = (Button) findViewById(R.id.Btnrecord);
+        playBtn = (Button) findViewById(R.id.Btnplay);
+        sendBtn = (Button) findViewById(R.id.BtnSend);
+
+        addressbookBtn = (Button) findViewById(R.id.addressbook);
+        edPhoneNumber = (EditText) findViewById(R.id.edReceverPhoneNumber);
+        edName = (EditText)findViewById(R.id.edReceverName);
+
+        edName.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        edPhoneNumber.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    //Enter키눌렀을떄 처리
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+        PermissionFunction();
+        RetrofitFunction();
+
+
         try {
+            Intent intent = getIntent();
             name = intent.getExtras().getString("name");
-            phoneNumber = intent.getExtras().getString("phoneNumber");
+            phoneNumber = intent.getExtras().getString("phoneNumber").replace("-","");
+            edName.setText(name);
+            edPhoneNumber.setText(phoneNumber);
         } catch (Exception e) {
 
         }
 
-        PermissionFunction();
-        RetrofitFunction();
         XMLSetting();
+
     }
 
     private void RetrofitFunction() {
@@ -138,7 +178,7 @@ public class LetterActivity extends AppCompatActivity {
         PermissionListener permissionListener = new PermissionListener() {
             @Override
             public void onPermissionGranted() {
-                Toast.makeText(getApplicationContext(), "권한허가", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "권한허가", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -157,16 +197,7 @@ public class LetterActivity extends AppCompatActivity {
     }
 
     private void XMLSetting() {
-        recordBtn = (Button) findViewById(R.id.Btnrecord);
-        playBtn = (Button) findViewById(R.id.Btnplay);
-        sendBtn = (Button) findViewById(R.id.BtnSend);
 
-        addressbookBtn = (Button) findViewById(R.id.addressbook);
-
-        edPhoneNumber = (EditText) findViewById(R.id.edReceverPhoneNumber);
-        edName = (EditText)findViewById(R.id.edReceverName);
-        edName.setText(name);
-        edPhoneNumber.setText(phoneNumber);
         if (encodedVoice == null) {
             //  화면에 안 보임.
             playBtn.setVisibility(View.INVISIBLE);
@@ -359,7 +390,7 @@ public class LetterActivity extends AppCompatActivity {
                     ToastFunction("해당 친구가 존재하지 않습니다. 다시 선택해주세요.");
                     return ;
                 }
-
+                MyApplication myApp = (MyApplication) getApplicationContext();
                 builderSetting("id",myApp.getId());
                 builderSetting("date",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()).trim());
                 builderSetting("recever",phoneNumber);

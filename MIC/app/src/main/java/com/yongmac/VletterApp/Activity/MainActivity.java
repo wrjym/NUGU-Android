@@ -17,6 +17,7 @@ public class MainActivity extends Activity{
     private WebView mWebView;   //웹뷰
     private WebSettings mWebSettings;   //웹뷰세팅
     public String HostingURL= "http://13.209.89.216:8080/NUGU/";
+//    public String HostingURL= "https://3e2cf084.ngrok.io/test";
     private long lastTimeBackPressed;
 
     @Override
@@ -50,8 +51,6 @@ public class MainActivity extends Activity{
         AndroidBridge ab = new AndroidBridge(mWebView, MainActivity.this);
         mWebView.addJavascriptInterface(ab,"Android");
 
-//        Intent intent = new Intent(getApplicationContext(), LetterActivity.class);
-//        startActivity(intent);
 
     }
 
