@@ -19,7 +19,7 @@
             android:id="@+id/sendTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="40dp"
+            android:paddingTop="30dp"
             android:text="편지 보내기"
             android:textAlignment="center"
             android:textSize="30sp" />
@@ -63,7 +63,7 @@
                     android:id="@+id/edReceverName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
 
                     android:layout_weight="1" />
 

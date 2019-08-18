@@ -141,6 +141,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:hint="제목을 입력하세요."
+                        android:singleLine="true"
                         android:textAlignment="center" />
 
                 </LinearLayout>

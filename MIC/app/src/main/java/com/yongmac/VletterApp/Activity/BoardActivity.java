@@ -58,10 +58,10 @@ public class BoardActivity extends AppCompatActivity {
     //해당 음성이 담길 String 문자열
     String encodedVoice = null;
 
-    public String HostingURL= "http://13.209.89.216:8080/NUGU/";
-    final String url_address = HostingURL + "/boardUpload";
+    public String HostingURL = "http://13.209.89.216:8080/NUGU";
+    final String url_address = "http://13.209.89.216:8080/NUGU/boardUpload";
 
-     InputMethodManager imm;
+    InputMethodManager imm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +225,15 @@ public class BoardActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if ("".equals(TvTheme.getText()) || null == TvTheme.getText()) {
+                    ToastFunction("보내실 테마가 입력되지 않았습니다.\n 테마를 선택해주세요.");
+                    return;
+                }
+                if ("".equals(edtitle.getText().toString()) || null == edtitle.getText().toString()) {
+                    ToastFunction("제목이 입력되지 않았습니다.\n 제목을 입력해주세요.");
+                    return;
+                }
+
                 new SendPost().execute();
             }
         });
@@ -326,15 +335,6 @@ public class BoardActivity extends AppCompatActivity {
                 builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
                 MyApplication myApp;
                 myApp = (MyApplication) getApplicationContext();
-                if ("".equals(edtitle.getText().toString())) {
-                    ToastFunction("제목이 입력되지 않았습니다.\n 제목을 입력해주세요.");
-                    return;
-                }
-                if ("".equals(TvTheme.getText())) {
-                    ToastFunction("보내실 테마가 입력되지 않았습니다.\n 테마를 선택해주세요.");
-                    return;
-                }
-
                 builderSetting("id", myApp.getId());
                 builderSetting("title", edtitle.getText().toString());
                 builderSetting("theme", TvTheme.getText().toString());
@@ -366,14 +366,14 @@ public class BoardActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(BoardActivity.this, "편지가 전송 되었습니다.", Toast.LENGTH_SHORT).show();
+            ToastFunction("편지가 전송 되었습니다.");
             finish();
         }
 
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            Toast.makeText(BoardActivity.this, "편지를 전송하지 못 했습니다.", Toast.LENGTH_SHORT).show();
+            ToastFunction("편지를 전송하지 못 했습니다.");
         }
 
         @Override

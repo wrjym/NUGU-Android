@@ -71,7 +71,7 @@ public class LetterActivity extends AppCompatActivity {
     EditText edName, edPhoneNumber;
 
     public String HostingURL= "http://13.209.89.216:8080/NUGU/";
-    final String url_address = HostingURL + "/letterUpload";
+    final String url_address = "http://13.209.89.216:8080/NUGU/letterUpload";
 
     private Retrofit retrofit;
     private RetrofitAPI mRetrofitAPI;
@@ -96,8 +96,6 @@ public class LetterActivity extends AppCompatActivity {
         addressbookBtn = (Button) findViewById(R.id.addressbook);
         edPhoneNumber = (EditText) findViewById(R.id.edReceverPhoneNumber);
         edName = (EditText)findViewById(R.id.edReceverName);
-
-
 
         PermissionFunction();
         RetrofitFunction();
@@ -286,7 +284,7 @@ public class LetterActivity extends AppCompatActivity {
                 } else {
                     edName.setText("");
                     edPhoneNumber.setText("");
-                    ToastFunction("해당하는 친구가 없습니다");
+                    ToastFunction("해당 친구가 존재하지 않습니다. 전화 번호를 입력해주세요.");
                 }
             }
         });
@@ -364,10 +362,6 @@ public class LetterActivity extends AppCompatActivity {
                 builder = MultipartEntityBuilder.create();
                 builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-                if("".equals(edPhoneNumber)){
-                    ToastFunction("해당 친구가 존재하지 않습니다. 전화 번호를 입력해주세요.");
-                    return ;
-                }
                 MyApplication myApp = (MyApplication) getApplicationContext();
                 builderSetting("id",myApp.getId());
                 builderSetting("date",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()).trim());
